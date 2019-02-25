@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import hens from './hens.js'
 
 /**
@@ -5,14 +6,10 @@ import hens from './hens.js'
  * Convertis le code ci-dessous en ES6, qu'importe la méthode
 */
 
-var sum = 0
-var numbers = [0, 1, 1, 2, 3, 5, 8, 13, 21]
+const numbers = [0, 1, 1, 2, 3, 5, 8, 13, 21]
+const sum = numbers.reduce((a, b) => a + b)
 
-for (var i = 0; i < numbers.length; ++i) {
-  sum += numbers[i]
-}
-
-export var ex1 = sum
+export const ex1 = sum
 
 /**
  * Exercice 2
@@ -20,26 +17,19 @@ export var ex1 = sum
  * En même temps, convertis ce code en ES6
  */
 
-var animals1 = ['dog', 'cat', 'faverjon', 'bird']
-var animals2 = ['lion', 'squirrel', 'bear', 'pig']
+const animals1 = ['dog', 'cat', 'faverjon', 'bird']
+const animals2 = ['lion', 'squirrel', 'bear', 'pig']
 
-export var allTheAnimals = [] // TODO
-export var ex2 = allTheAnimals
+export const allTheAnimals = [...animals1, ...animals2]
+export const ex2 = allTheAnimals
 
 /**
  * Exercice 3
  * Convertis ce code en ES6 en utilisant les `fat arrow functions`
  */
 
-function makeDogACat (thing) {
-  if (thing === 'dog') {
-    return 'cat'
-  }
-
-  return thing
-}
-
-export var ex3 = makeDogACat
+const makeDogACat = (thing) => thing === 'dog' ? 'cat' : thing
+export const ex3 = makeDogACat
 
 /**
  * Exercice 4
@@ -54,6 +44,7 @@ export function scope () {
   } else {
     return a
   }
+  // Renvoi 'dog'
 }
 
 /**
@@ -65,10 +56,8 @@ export function scope () {
  * Cette fonction sera une fonction d'incrémentation.
  */
 
-const number = 41
-export const transformNumber = () => {} // TODO
-
-export const makeSomethingOutOfNumber = null // TODO
+export const transformNumber = n => n + 1
+export const makeSomethingOutOfNumber = (f, n) => f(n)
 
 /**
  * Exercice 6
@@ -92,8 +81,10 @@ export const sig2 = (fullName) => fullName
 export const sig3 = (fullName) => `Jean-Michel ${fullName}`
 export const sig4 = (fullName) => `${fullName}, First of Her Name, the Unburnt, Queen of the Andals and the First Men, Khaleesi of the Great Grass Sea, Breaker of Chains, and Mother of Dragons`
 
-export const generateArticleWithSignature = () => {} // TODO
-export const finalArticle = generateArticleWithSignature(/* ... */) // TODO
+export const generateArticleWithSignature = (texte, sig, name) => {
+  return texte + sig(name)
+}
+export const finalArticle = generateArticleWithSignature(articleBody, sig4, 'Daenerys Targaryen')
 
 /**
  * Exercice 7
@@ -118,16 +109,18 @@ export const genAnimal = (name, species, legs, age, furColor) => ({
 })
 
 // Crée donc l'animal de ton choix :
-export const sampleAnimal = genAnimal(/* ... */)
+export const sampleAnimal = genAnimal('Poppy', 'Hyppoplemousse', 8, 666, 'Pink with green dots')
 
 // Ton animal souhaite changer de couleur de fourrure, comment répercutes-tu la modif sur ton object ?
+
+// => genAnimal.furColor = <newcolor>
 
 // 7.1
 // Tu reçois ta commande de 8 poules pour aller avec tes ESIPE, et ça te saoule d'appeler genAnimal
 // en écrivant 'hen' (poule en anglais) à chaque fois pour l'espèce.
 // Tu ne réécriras PAS de code créant un object.
 
-export const generateHen = () => {} // TODO
+export const generateHen = (name) => genAnimal(name, 'hen', 2, 10, 'red')
 
 // 7.2
 // Les poules sont arrivées, on souhaiterait pouvoir avoir un inventaire précis de l'état de nos bêtes.
@@ -136,32 +129,52 @@ export const generateHen = () => {} // TODO
 // On souhaite écrire la fonction qui prend les poules en entrée et renvoie un objet constitué du nom de la poule
 // et de son âge. On utilisera Array.map
 
-export const hensOnlyNameAndAge = (hens) => {} // TODO
+export const hensOnlyNameAndAge = (hens) => {
+  return hens.map(hen => {
+    return {
+      'name': hen.name,
+      'age': hen.age
+    }
+  })
+}
 
 // 7.3
 // On souhaite savoir si nos poules sont bien portantes et ne souffrent pas de mutations génétiques affectant leurs pattes.
 // Ecrire la fonction qui prend les poules en entrée et renvoie les noms des poules affectées.
 
-export const mutatedHens = (hens) => {} // TODO
+export const mutatedHens = (hens) => {
+  return hens
+    .filter(hen => hen.legs !== 2)
+    .map(hen => hen.name)
+}
 
 // 7.4
 // On souhaite connaitre la moyenne d'âge de notre basse-cour.
 // Ecrire la fonction qui prend les poules et renvoie cette moyenne. On utilisera Array.reduce.
 
-export const averageAgeForHens = (hens) => {} // TODO
+export const averageAgeForHens = (hens) => {
+  const sum = hens.reduce((acc, hen) => acc + hen.age, 0)
+  return sum / hens.length
+}
 
 // 7.5
 // Pour des questions d'organisation et de simplicité de la gestion, on vous demande de ne garder que les poules possédant
 // des noms de 7 lettres maximum
 // Ecrire la fonction qui renverra les noms concernés.
 
-export const max7CharsHens = (hens) => {} // TODO
+export const max7CharsHens = (hens) => {
+  return hens
+    .filter(hen => hen.name.length <= 7)
+    .map(hen => hen.name)
+}
 
 // 7.6
 // Un client très spécifique cherche une poule qui correspond à ses critères : une poule au plumage rouge âgée de plus de 15 ans.
 // Ecrire une fonction qui renverra la première poule correspondant à ces critères.
 
-export const specificHen = (hens) => {} // TODO
+export const specificHen = (hens) => {
+  return hens.find(hen => hen.age > 15 && hen.furColor === 'red')
+}
 
 // MORE ???
 // Ecrire une fonction permettant de fusionner un tableau d'objects en un seul object.
@@ -170,20 +183,28 @@ export const specificHen = (hens) => {} // TODO
 //
 // Ex : mergeObjects([{a: 1, b: 2}, {b: 3, c: 4}]) --> {a: 1, b: 3, c: 4}
 
-export const mergeObjects = (objects) => {} // TODO
+export const mergeObjects = (objects) => {
+  return objects.reduce((acc, obj) => ({...acc, ...obj}), {})
+}
 
 // Ecrire la fonction qui prendra deux tableaux et renverra leur union
 // (aka leur concatenation, sans les éléments en double)
 
-export const union = (arr1, arr2) => {} // TODO
+export const union = (arr1, arr2) => [...new Set([...arr1, ...arr2])]
 
 // Ecrire la fonction qui prendra un tableau de tableaux et renverra la version aplatie (un seul tableau avec tous les éléments)
 // /!\ Vous prendrez en compte les tableaux imbriqués
 
-export const flatten = (arr) => {} // TODO
+// export const flatten = (arr) => arr.flat(Infinity)
+// or
+export const flatten = (arr) => {
+  return arr.reduce((acc, tab) => {
+    return Array.isArray(tab) ? [...acc, ...(flatten(tab))] : [...acc, tab]
+  }, [])
+}
 
 // Ecrire une fonction qui, pour un tableau et un élément, renvoie le tableau où l'on aura placé cet élément entre chaque
 // membre du tableau.
 // Ex : intercalate(",", ["a", "b", "c", "d"]) --> ["a", ",", "b", ",", "c", ",", "d"])
 
-export const intercalate = (el, arr) => {} // TODO
+export const intercalate = (el, arr) => arr.join(el).split('')
