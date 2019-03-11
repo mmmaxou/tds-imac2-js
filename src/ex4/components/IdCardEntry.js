@@ -1,3 +1,4 @@
 import { h } from 'hyperapp'
 
-export default (/* props */) => null // TODO
+export default ({key, value}) =>
+  h('p', null, ['' + key, ' : ', '' + value])

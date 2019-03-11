@@ -9,7 +9,7 @@ const plugins = [
     filename: './bundle.css',
     allChunks: true
   }),
-  new webpack.optimize.ModuleConcatenationPlugin(),
+  new webpack.optimize.ModuleConcatenationPlugin()
 ]
 
 const config = {

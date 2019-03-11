@@ -1,9 +1,24 @@
 import { app } from 'hyperapp'
 // import logger from '@hyperapp/logger'
-
 import exampleActions from './actions'
 import exampleState from './state'
 import exampleView from './components/views/Counter'
+
+import ex1State from './ex1/state'
+import ex1Action from './ex1/actions'
+import ex1View from './ex1/components/views/ExerciseOneView'
+
+import ex2State from './ex2/state'
+import ex2Action from './ex2/actions'
+import ex2View from './ex2/components/views/ExerciseTwoView'
+
+import ex3State from './ex3/state'
+import ex3Action from './ex3/actions'
+import ex3View from './ex3/components/views/ExerciseThreeView'
+
+import ex4State from './ex4/state'
+import ex4Action from './ex4/actions'
+import ex4View from './ex4/components/views/ExerciseFourView'
 
 /*
 La fonction app est la fonction qui sert à dessiner l'application javascript sur le navigateur
@@ -28,9 +43,44 @@ Une application hyperapp prend 4 paramètres:
  * Il faudra linker le bon state, les bonnes actions et la bonne view. Je vous conseille vivement de nommer
  * vos imports en conséquence pour savoir ce que vous utilisez pour render l'app.
  */
-app(
-  exampleState,
-  exampleActions,
-  exampleView,
-  document.body
-)
+const currentExercise = 4
+if (currentExercise === 0) {
+  app(
+    exampleState,
+    exampleActions,
+    exampleView,
+    document.body
+  )
+} else
+if (currentExercise === 1) {
+  app(
+    ex1State,
+    ex1Action,
+    ex1View,
+    document.body
+  )
+} else
+if (currentExercise === 2) {
+  app(
+    ex2State,
+    ex2Action,
+    ex2View,
+    document.body
+  )
+} else
+if (currentExercise === 3) {
+  app(
+    ex3State,
+    ex3Action,
+    ex3View,
+    document.body
+  )
+} else
+if (currentExercise === 4) {
+  app(
+    ex4State,
+    ex4Action,
+    ex4View,
+    document.body
+  )
+}

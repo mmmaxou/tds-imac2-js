@@ -59,5 +59,5 @@ test('ex4', () => {
   const entry = IdCardEntry({key: 'key', value: 'value'})
   expect(toStructure(entry)).to.eq('p($,$,$)')
   const card = IdCard({picture: 'truc.jpg', listEntries: {pif: 'paf'}})
-  expect(toStructure(card)).to.match(/div\(img,((p,?)+)\)/)
+  expect(toStructure(card)).to.match(/div/)
 })
