@@ -1,7 +1,7 @@
 import { h } from 'hyperapp'
 import Header from './Header'
 import ListTeacher from './ListTeacher'
-import ListSubject from './ListSubject'
+import ListCategories from './ListCategories'
 
 export default (state) =>
   <div>
@@ -9,6 +9,6 @@ export default (state) =>
     <Header />
     <div className='container'>
       <ListTeacher teachers={state.teachers} subjects={state.subjects}/>
-      <ListSubject />
+      <ListCategories teachers={state.teachers} categories={state.categories} subjects={state.subjects}/>
     </div>
   </div>

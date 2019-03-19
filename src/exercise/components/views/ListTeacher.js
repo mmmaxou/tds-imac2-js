@@ -2,11 +2,11 @@ import { h } from 'hyperapp'
 import Teacher from '../Teacher'
 export default (props) =>
   <div className='row'>
-    <h1>Liste des professeurs</h1>
+    <h2>Liste des professeurs</h2>
     {
       props.teachers.map(teacher => {
         const formatedSubject = props.subjects.filter(s => {
-          return teacher.subjects.includes(s.id)
+          return teacher.subjectIDs.includes(s.id)
         })
         return <Teacher id={teacher.id}
           firstname={teacher.firstname}
